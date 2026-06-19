@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | Zion Tech Store</title>
+  <link rel="stylesheet" href="css/style.css">
+    <script src="js/login.js"></script>
+
+
+</head>
+<body class="login-body">
+
+  <header>
+    <div class="logo">Zion Tech Store</div>
+    <nav>
+      <ul>
+        <li><a href="produto">Voltar para Loja</a></li>
+      </ul>
+    </nav>
+  </header>
+
+<main class="container-login">
+    <form class="card-login">
+      <h2>Acessar Conta</h2>
+
+      <div class="campo">
+        <label>E-mail</label>
+        <input type="email" placeholder="seu@email.com" id="email" required>
+      </div>
+
+      <div class="campo">
+        <label>Senha</label>
+        <input type="password" placeholder="••••••••" id="senha" required>
+      </div>
+
+      <button type="button" class="btn-comprar" onclick="fazerLogin()">Entrar</button>
+
+
+      <div class="admin-section">
+
+
+        <p>Acesso restrito:</p>
+        <button type="button" class="btn-admin" onclick="window.location.href='cadastroadm'">  Painel Administrativo</button>
+      </div>
+
+      <p class="link-retro">Não tem conta? <a href="Cadastro.html">Cadastre-se</a></p>
+
+    </form>
+</main>

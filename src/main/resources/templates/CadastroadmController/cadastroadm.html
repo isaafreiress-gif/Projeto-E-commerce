@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro | Zion Tech Store</title>
+  <link rel="stylesheet" href="css/style.css">
+    <script src="js/login.js"></script>
+
+</head>
+<body class="login-body">
+
+  <section id="cadastro" class="secao-auditoria" style="margin-top: 30px;">
+    <h3>🔐 Registro de Administrador</h3>
+    <form id="form-cadastro-adm" class="form-admin">
+        <div class="campo">
+            <label>Nome do Colaborador</label>
+            <input type="text" id="adm-nome" placeholder="Nome completo" required>
+        </div>
+        <div class="campo">
+            <label>Número de Matrícula</label>
+            <input type="number" id="adm-matricula" placeholder="Ex: 2026001" required>
+        </div>
+        <div class="campo">
+            <label>Senha de Acesso</label>
+            <input type="password" id="adm-senha" placeholder="••••••••" required>
+        </div>
+        <div class="campo">
+            <label>Chave Mestre de Segurança</label>
+            <input type="password" id="adm-chave" placeholder="Chave Zion Tech" required>
+        </div>
+        <button type="button" class="btn-comprar" onclick="registrarAdmSeguro()">Validar e Criar ADM</button>
+    </form>
+
+    <div id="lista-adms" style="margin-top: 20px;"></div>
+</section>
+
+</body>
+</html>
+

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Zion tech store</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">Zion Tech Store</div>
+    <div class="busca-container">
+    <input type="text" id="input-busca" placeholder="O que você busca?">
+    <button id="btn-busca">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+      </svg>
+    </button>
+
+  </div>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li>Produtos</li>
+        <li><a href="carrinho" class="link-carrinho">Carrinho (<span id="contador-carrinho">0</span>)</a></li>
+        <li><a href="login">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+  <section class="produtos-section">
+  <h2 class="titulo-sessao">produtos</h2>
+
+  <div class="grid-produtos">
+    <div class="card">
+      <img src="img/iPhone-17-Pro-PNG-758x473.png" alt="Iphone">
+      <div class="card-info">
+        <h3>iPhone 17 Pro</h3>
+        <p>R$ 11.999,00</p>
+        <button class="btn-comprar" data-nome="Iphone 17 Pro" data-preco="11999.00">Comprar</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="img/watch_og_339223162 (1).png" alt="Apple Watch">
+      <div class="card-info">
+        <h3>Apple Watch</h3>
+        <p>R$ 2.499.79</p>
+        <button class="btn-comprar" data-nome="Apple Watch" data-preco="2499.79">Comprar</button>
+      </div>
+    </div>
+
+    <div class="card">
+     <img src="img/vision pro (1).png" alt="Vision pro">
+      <div class="card-info">
+        <h3>Vision Pro</h3>
+        <p>R$ 23.499,00</p>
+        <button class="btn-comprar" data-nome="Vision Pro" data-preco="23499.00">Comprar</button>
+      </div>
+    </div>
+
+    <div class="card">
+     <img src="img/ps5.png" alt="PlayStation 5">
+      <div class="card-info">
+        <h3>PlayStation 5</h3>
+        <p>R$ 4.560,00</p>
+        <button class="btn-comprar" data-nome="PlayStation 5" data-preco="4560.00">Comprar</button>
+    </div>
+    </div>
+
+    <div class="card">
+     <img src="img/anel inteligente.webp" alt="anel inteligente">
+      <div class="card-info">
+        <h3>Anel Inteligente</h3>
+        <p>R$ 3.560,00</p>
+        <button class="btn-comprar" data-nome="Anel Inteligente" data-preco="3560.00">Comprar</button>
+    </div>
+    </div>
+
+    <div class="card">
+     <img src="img/drone.jpg" alt="Drone">
+      <div class="card-info">
+        <h3>Drone de Corrida</h3>
+        <p>4.980,00</p>
+        <button class="btn-comprar" data-nome="Drone de Coriida" data-preco="498000">Comprar</button>
+      </div>
+    </div>
+
+
+    <div class="card">
+     <img src="img/fone.jpg" alt="fone">
+      <div class="card-info">
+        <h3>Headsets Espaciais</h3>
+        <p>R$ 499,99</p>
+        <button class="btn-comprar" data-nome="Headsets Espaciais" data-preco="499.99">Comprar</button>
+      </div>
+    </div>
+
+    <div class="card">
+     <img src="img/monitor.webp" alt="Monitor">
+      <div class="card-info">
+        <h3>Monitor Curvo de 49" OLED</h3>
+        <p>R$ 8.879,99</p>
+        <button class="btn-comprar" data-nome="Monitor Curvo de 29 OLED" data-preco="8879.99">Comprar</button>
+      </div>
+    </div>
+
+    <div class="card">
+     <img src="img/mouse pad.webp" alt="Mouse Pad">
+      <div class="card-info">
+        <h3>Mousepads LED</h3>
+        <p>R$ 150,00</p>
+        <button class="btn-comprar" data-nome="Mousepads LED" data-preco="150.00">Comprar</button>
+      </div>
+    </div>
+
+      <div class="card">
+     <img src="img/mouses.webp" alt="Mouse">
+      <div class="card-info">
+        <h3>Mouses de Alta Precisão</h3>
+        <p>R$ 399,99</p>
+        <button class="btn-comprar" data-nome="Mouses de Alta Precisão" data-preco="399.99">Comprar</button>
+      </div>
+    </div>
+
+        <div class="card">
+     <img src="img/teclado.webp" alt="Teclado">
+      <div class="card-info">
+        <h3>Teclado Mecânico: Com teclas transparentes e luzes customizáveis.</h3>
+        <p>R$ 569,99</p>
+        <button class="btn-comprar" data-nome=" Teclado Mecânico: Com teclas transparentes e luzes customizáveis." data-preco="569.99">Comprar</button>
+      </div>
+    </div>
+
+     <div class="card">
+     <img src="img/relogio tubular.jpg" alt="Relogio tubular">
+      <div class="card-info">
+        <h3>Relógio tubular Nixie</h3>
+        <p>R$ 550,00</p>
+        <button class="btn-comprar" data-nome="Relógio tubular Nixie" data-preco="550.00">Comprar</button>
+      </div>
+    </div>
+
+
+    </div>
+</section>
+  <script src="js/script.js"></script>
+</head>
+</body>

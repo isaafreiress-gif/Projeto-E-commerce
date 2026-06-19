@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Meu Carrinho - Zion Tech Store</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Orbitron:wght@900&display=swap" rel="stylesheet">
+</head>
+<body class="carrinho-body">
+
+  <header>
+    <div class="logo">Zion Tech Store</div>
+    <nav>
+      <ul>
+        <li><a href="produto">Voltar para a Loja</a></li>
+        <li><a href="#" onclick="logout()">Sair</a></li>
+
+      </ul>
+    </nav>
+  </header>
+
+  <main class="carrinho-container">
+    <h1 class="titulo-carrinho">Meu Carrinho</h1>
+
+    <div id="lista-carrinho"></div>
+
+    <div class="resumo-carrinho">
+      <h2>Total: <span id="total-carrinho">R$ 0,00</span></h2>
+      <button class="btn-finalizar">Finalizar Compra</button>
+    </div>
+  </main>
+
+  <script src="js/Script.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Zion Tech | Painel Administrativo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Orbitron:wght@900&display=swap" rel="stylesheet">
+</head>
+<body class="admin-page">
+
+    <div class="menu-lateral">
+        <h2>Zion Admin</h2>
+        <a href="#stats">📊 Dashboard</a>
+        <a href="#cadastro">📦 Novo Produto</a>
+        <a href="#estoque">📋 Estoque</a>
+        <a href="cadastroadm">👤 Cadastrar ADM</a>
+        <a href="produto" style="margin-top: 40px; border: 1px solid #a100d5;">Voltar para Loja</a>
+        <a href="#" onclick="logout()" style="color: #ff4d4d;">Sair</a>
+    </div>
+
+    <div class="conteudo-principal">
+        <section id="stats">
+            <h1>Visão Geral</h1>
+            <div class="container-cards">
+                <div class="card">
+                    <h3>Vendas Estimadas</h3>
+                    <p id="vendas-valor">R$ 0,00</p>
+                </div>
+                <div class="card">
+                    <h3>Total de Pedidos</h3>
+                    <p id="vendas-qtd">0</p>
+                </div>
+                <div class="card">
+                    <h3>Usuários Ativos</h3>
+                    <p id="usuarios-qtd">0</p>
+                </div>
+            </div>
+        </section>
+
+        <hr style="border: 0.5px solid #29002e; margin: 40px 0;">
+
+        <section id="cadastro" class="secao-auditoria">
+            <h3>📦 Cadastrar Novo Produto</h3>
+            <form id="form-produto" class="form-admin">
+                <div class="campo">
+                    <label>Nome</label>
+                    <input type="text" id="p-nome" placeholder="Ex: Teclado Mecânico" required>
+                </div>
+                <div class="campo">
+                    <label>Preço (R$)</label>
+                    <input type="number" id="p-preco" step="0.01" required>
+                </div>
+                <div class="campo">
+                    <label>URL Imagem</label>
+                    <input type="text" id="p-img" placeholder="img/produto.png">
+                </div>
+                <button type="button" class="btn-comprar" onclick="salvarProduto()">Adicionar à Loja</button>
+            </form>
+        </section>
+
+        <section id="estoque" class="secao-auditoria" style="margin-top: 30px;">
+            <h3>📋 Vendas</h3>
+            <div id="tabela-estoque"></div>
+        </section>
+    </div>
+
+    <script src="Script.js"></script>
+</body>
+</html>
