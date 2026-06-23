@@ -1,12 +1,12 @@
 package br.edu.ifg.luziania.pw.controller;
 
 
+import br.edu.ifg.luziania.pw.model.AutenticacaoDTO;
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 @Path("login")
 public class LoginController {
@@ -23,7 +23,11 @@ public class LoginController {
       return Templates.login();
     }
 
+    @POST
+    @Path("autenticar")
+    @Consumes (MediaType.APPLICATION_JSON)
+    public Response autenticacao(AutenticacaoDTO dto) {
+      return Response.ok().build();
 
-
-
+    }
 }

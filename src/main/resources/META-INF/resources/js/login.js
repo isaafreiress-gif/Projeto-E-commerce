@@ -1,7 +1,47 @@
+var AutenticacaoDTO = {
+  email: "",
+  senha: "",
 
-// =========================================================================
+}
+
+//populando o DTO com dados do html
+function autenticar() {
+  AutenticacaoDTO.email = document.getElementById("email").value;
+  AutenticacaoDTO.senha = document.getElementById("password").value;
+
+  //definindo parametros da requisiçao POST para autenticaçao de usuario
+  var url = 'http://localhost:8080/autenticar';
+  var configRequest ={
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'Content-type': 'application/json',
+      },
+    body: JSON.stringify(AutenticacaoDTO)
+  };
+
+  //executando requisição Post
+  fetch(url, configRequest)
+    .then(function (response) {
+        if (response.ok) {
+            console.log("Dados enviados com sucesso!")
+        } else {
+            console.log("Falha ao enviar dados!");
+        }
+    })
+    .catch(function (error) {
+        console.error(error);
+})
+
+
+
+
+
+
+
+
 // 1. FUNÇÃO PARA CADASTRAR UM NOVO USUÁRIO (Roda no cadastro de clientes)
-// =========================================================================
+
 function cadastrar() {
     // buscar o que o usuário digitou nos campos da tela
     const nome = document.getElementById('nome').value;
@@ -87,7 +127,7 @@ function logar() {
     } else {
         window.location.href = "index.html";
     }
-}
+}}
 
 
 
