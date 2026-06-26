@@ -1,43 +1,3 @@
-var AutenticacaoDTO = {
-  email: "",
-  senha: "",
-
-}
-
-//populando o DTO com dados do html
-function autenticar() {
-  AutenticacaoDTO.email = document.getElementById("email").value;
-  AutenticacaoDTO.senha = document.getElementById("password").value;
-
-  //definindo parametros da requisiçao POST para autenticaçao de usuario
-  var url = 'http://localhost:8080/autenticar';
-  var configRequest ={
-      method: 'POST',
-      headers: {
-        'accept': 'application/json',
-        'Content-type': 'application/json',
-      },
-    body: JSON.stringify(AutenticacaoDTO)
-  };
-
-  //executando requisição Post
-  fetch(url, configRequest)
-    .then(function (response) {
-        if (response.ok) {
-            console.log("Dados enviados com sucesso!")
-        } else {
-            console.log("Falha ao enviar dados!");
-        }
-    })
-    .catch(function (error) {
-        console.error(error);
-})
-
-
-
-
-
-
 
 
 // 1. FUNÇÃO PARA CADASTRAR UM NOVO USUÁRIO (Roda no cadastro de clientes)
@@ -65,7 +25,7 @@ function cadastrar() {
     alert("Prontinho! Seu cadastro foi feito com sucesso.");
 
     // Manda o usuário para a página de login
-    window.location.href = "Login.html";
+    window.location.href = "Login";
 }
 
 // =========================================================================
@@ -82,7 +42,7 @@ function fazerLogin() {
 
     // Como não há banco de dados, simulamos o sucesso com qualquer dado preenchido
     alert(`Uhul! Login feito com sucesso. Seja bem-vindo(a)!`);
-    window.location.href = "carrinho.html";
+    window.location.href = "produto";
 }
 
 // =========================================================================
@@ -127,7 +87,7 @@ function logar() {
     } else {
         window.location.href = "index.html";
     }
-}}
+}
 
 
 

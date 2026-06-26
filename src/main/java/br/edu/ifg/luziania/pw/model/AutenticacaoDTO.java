@@ -1,35 +1,36 @@
 package br.edu.ifg.luziania.pw.model;
 
 public class AutenticacaoDTO {
-  //atributos
-  private String email;
-  private String senha;
+    // Atributos
+    private String email;
+    private String senha;
 
-  //construtor vazio
-  public AutenticacaoDTO(){
-    email = "";
-    senha = "";
-  }
+    //Construtor vazio
+    public AutenticacaoDTO() {
+      email = "";
+      senha = "";
+    }
 
-  //contrutor completo
-  public AutenticacaoDTO(String senha, String email) {
-    this.senha = senha;
-    this.email = email;
-  }
+    //Construtor completo
+    public AutenticacaoDTO(String email, String senha) {
+      this.email = email;
+      this.senha = senha;
+    }
 
-  public String getEmail() {
-    return email;
-  }
+    // Getters and Setters
+    public String getEmail() {
+      return email;
+    }
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+    public void setEmail(String email) {
+      this.email = email;
+    }
 
-  public String getSenha() {
-    return senha;
-  }
+    public String getSenha() {
+      return senha;
+    }
 
-  public void setSenha(String senha) {
-    this.senha = senha;
+    public void setSenha(String senha) {
+      this.senha = senha;
+    }
   }
-}

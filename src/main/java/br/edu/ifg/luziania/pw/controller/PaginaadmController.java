@@ -7,17 +7,17 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
-@Path("cadastroprodutos")
-public class CadastroprodutosController {
+@Path("paginaadm")
+public class PaginaadmController {
 
   @CheckedTemplate
-  public static class Templates{
-    public static native TemplateInstance cadastroprodutos();
+  public static class Templates {
+    public static native TemplateInstance paginaadm();
   }
 
   @GET()
   @Produces(MediaType.TEXT_HTML)
-  public TemplateInstance cadastroprodutos() {
-    return CadastroprodutosController.Templates.cadastroprodutos();
+  public TemplateInstance paginaadm() {
+    return PaginaadmController.Templates.paginaadm();
   }
 }
