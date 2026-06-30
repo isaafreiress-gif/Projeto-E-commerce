@@ -21,3 +21,5 @@ public class CadastroprodutosController {
     return CadastroprodutosController.Templates.cadastroprodutos();
   }
 }
+
+
