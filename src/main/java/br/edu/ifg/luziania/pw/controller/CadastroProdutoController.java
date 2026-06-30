@@ -7,19 +7,17 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
-@Path("paginaadm")
-public class PaginaadmController {
+@Path("cadastroproduto") // A rota certa fica aqui, na classe principal
+public class CadastroProdutoController {
 
   @CheckedTemplate
   public static class Templates {
-    public static native TemplateInstance paginaadm();
+    public static native TemplateInstance cadastroproduto();
   }
 
-  @GET()
+  @GET
   @Produces(MediaType.TEXT_HTML)
-  public TemplateInstance paginaadm() {
-    return PaginaadmController.Templates.paginaadm();
+  public TemplateInstance cadastroproduto() {
+    return CadastroProdutoController.Templates.cadastroproduto();
   }
 }
-
-

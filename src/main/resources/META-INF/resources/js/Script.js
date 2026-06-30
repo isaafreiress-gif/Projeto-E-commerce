@@ -185,4 +185,100 @@ document.addEventListener('DOMContentLoaded', atualizarContador);
 
 
 
+// FUNÇÃO PARA CADASTRAR PRODUTO (Envia para o Banco via API)
+function cadastrarProduto() {
+  // Pegando os valores dos inputs do HTML
+  const nome = document.getElementById("prod-nome").value.trim();
+  const preco = document.getElementById("prod-preco").value.trim();
+  const imagem = document.getElementById("prod-imagem").value.trim();
+  const descricao = document.getElementById("prod-descricao").value.trim();
 
+  // Validação simples para não enviar campos vazios
+  if (nome === "" || preco === "" || imagem === "" || descricao === "") {
+    alert("🚨 Por favor, preencha todos os campos antes de salvar!");
+    return;
+  }
+
+  // Montando o Objeto DTO correspondente ao Java
+  const produtoDTO = {
+    nome: nome,
+    preco: parseFloat(preco), // Converte o texto para número decimal
+    imagemUrl: imagem,
+    descricao: descricao
+  };
+
+  // Configurando a requisição para o Quarkus
+  const url = 'http://localhost:8080/produtos'; // Certifique-se de usar a sua rota correta do Java
+  const configRequest = {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(produtoDTO)
+  };
+
+  // Executando a chamada HTTP
+  fetch(url, configRequest)
+    .then(response => {
+      if (response.ok) {
+        alert("✨ Produto cadastrado com total sucesso!");
+        document.getElementById("form-produto").reset(); // Limpa os campos digitados
+      } else {
+        alert("❌ Erro no servidor ao tentar salvar o produto.");
+      }
+    })
+    .catch(error => {
+      console.error("Erro ao conectar na API:", error);
+      alert("❌ Não foi possível conectar ao servidor. O backend está rodando?");
+    });
+}
+
+
+
+// Executa assim que a página de estoque carregar
+document.addEventListener("DOMContentLoaded", function() {
+  if (document.getElementById("tabela-estoque-corpo")) {
+    carregarEstoque();
+  }
+});
+
+function carregarEstoque() {
+  const url = 'http://localhost:8080/produtos'; // Sua rota GET do backend que lista os produtos
+
+  fetch(url)
+    .then(response => response.json())
+    .then(produtos => {
+      const corpoTabela = document.getElementById("tabela-estoque-corpo");
+      corpoTabela.innerHTML = ""; // Limpa a tabela de exemplo antes de preencher
+
+      produtos.forEach(prod => {
+        corpoTabela.innerHTML += `
+                    <tr>
+                        <td>#${prod.id}</td>
+                        <td><img src="${prod.imagemUrl}" alt="Imagem" style="width: 40px; height: 40px; object-fit: contain;"></td>
+                        <td>${prod.nome}</td>
+                        <td>R$ ${prod.preco.toFixed(2).replace('.', ',')}</td>
+                        <td><span class="badge admin">Ativo</span></td>
+                        <td>
+                            <button class="btn-acao" onclick="editarProduto(${prod.id})">✏️</button>
+                            <button class="btn-acao" onclick="excluirProduto(${prod.id})" style="border-color: #ff4d4d; color: #ff4d4d;">🗑️</button>
+                        </td>
+                    </tr>
+                `;
+      });
+    })
+    .catch(error => console.error("Erro ao carregar estoque:", error));
+}
+
+function excluirProduto(id) {
+  if (confirm("Tem certeza que deseja deletar este produto?")) {
+    fetch(`http://localhost:8080/produtos/${id}`, { method: 'DELETE' })
+      .then(response => {
+        if (response.ok) {
+          alert("Produto removido!");
+          carregarEstoque(); // Recarrega a tabela
+        }
+      });
+  }
+}

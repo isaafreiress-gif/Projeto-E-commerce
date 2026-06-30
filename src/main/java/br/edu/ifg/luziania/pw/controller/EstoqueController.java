@@ -7,19 +7,17 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
-@Path("paginaadm")
-public class PaginaadmController {
+@Path("estoque")
+public class EstoqueController {
 
   @CheckedTemplate
   public static class Templates {
-    public static native TemplateInstance paginaadm();
+    public static native TemplateInstance estoque();
   }
 
-  @GET()
+  @GET
   @Produces(MediaType.TEXT_HTML)
-  public TemplateInstance paginaadm() {
-    return PaginaadmController.Templates.paginaadm();
+  public TemplateInstance estoque() {
+    return EstoqueController.Templates.estoque();
   }
 }
-
-
