@@ -1,27 +1,65 @@
 package br.edu.ifg.luziania.pw.model;
 
 public class ProdutoDTO {
-    private String nome;
-    private Double preco;
-    private String descricao;
+  private Integer id;
+  private String nome;
+  private Double preco;
+  private String imagem;
+  private String descricao;
 
-    // Construtor vazio obrigatório para o Jackson
-    public ProdutoDTO() {
-    }
+  public ProdutoDTO() {
+    this.id = 0;
+    this.nome = "";
+    this.preco = 0.0;
+    this.imagem = "";
+    this.descricao = "";
+  }
 
-    public ProdutoDTO(String nome, Double preco, String descricao) {
-        this.nome = nome;
-        this.preco = preco;
-        this.descricao = descricao;
-    }
+  public ProdutoDTO(Integer id, String nome, Double preco, String imagem, String descricao) {
+    this.id = id;
+    this.nome = nome;
+    this.preco = preco;
+    this.imagem = imagem;
+    this.descricao = descricao;
+  }
 
-    // Getters e Setters
-    public String getNome() { return nome; }
-    public void setNome(String nome) { this.nome = nome; }
+  public Integer getId() {
+    return id;
+  }
 
-    public Double getPreco() { return preco; }
-    public void setPreco(Double preco) { this.preco = preco; }
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-    public String getDescricao() { return descricao; }
-    public void setDescricao(String descricao) { this.descricao = descricao; }
+  public String getNome() {
+    return nome;
+  }
+
+  public void setNome(String nome) {
+    this.nome = nome;
+  }
+
+  public Double getPreco() {
+    return preco;
+  }
+
+  public void setPreco(Double preco) {
+    this.preco = preco;
+  }
+
+  public String getImagem() {
+    return imagem;
+  }
+
+  public void setImagem(String imagem) {
+    this.imagem = imagem;
+  }
+
+  public String getDescricao() {
+    return descricao;
+  }
+
+  public void setDescricao(String descricao) {
+    this.descricao = descricao;
+  }
 }

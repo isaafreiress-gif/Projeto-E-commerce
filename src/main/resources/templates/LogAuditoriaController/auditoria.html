@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Zion Tech | Painel Administrativo</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>Zion Tech | Auditoria</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Orbitron:wght@900&display=swap" rel="stylesheet">
-  <script src="js/paginaadm.js"></script>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body class="Cadastroprodutos">
 
@@ -13,8 +12,8 @@
   <aside class="menu-lateral">
     <h2>Zion Admin</h2>
     <nav>
-      <a href="paginaadm" class="active">📊 Dashboard</a>
-      <a href="auditoria">👤 Auditoria</a>
+      <a href="paginaadm">📊 Dashboard</a>
+      <a href="auditoria"class="active">👤 Usuários</a>
       <a href="cadastroproduto">📦 Novo Produto</a>
       <a href="estoque">📋 Estoque</a>
       <a href="cadastro">👤 Cadastrar ADM</a>
@@ -24,29 +23,32 @@
   </aside>
 
   <main class="conteudo-principal">
-    <section id="stats">
+    <section class="secao-auditoria">
       <div class="auditoria-header">
-        <h1>Visão Geral</h1>
-        <button class="btn-salvar" onclick="atualizarDados()">Atualizar Dados</button>
+        <h1>Logs do Sistema</h1>
+        <button onclick="carregarLogs()">Atualizar Dados</button>
       </div>
 
-      <div class="container-cards">
-        <div class="card">
-          <h3>Vendas Estimadas</h3>
-          <p id="vendas-valor">R$ 0,00</p>
-        </div>
-        <div class="card">
-          <h3>Total de Pedidos</h3>
-          <p id="vendas-qtd">0</p>
-        </div>
-        <div class="card">
-          <h3>Usuários Ativos</h3>
-          <p id="usuarios-qtd">0</p>
-        </div>
+      <div id="carregando" class="d-none">Carregando...</div>
+
+      <div id="container-tabela" class="table-responsive">
+        <table class="tabela-auditoria">
+          <thead>
+          <tr>
+            <th>Data / Hora</th>
+            <th>Usuário</th>
+            <th>Ação</th>
+          </tr>
+          </thead>
+          <tbody id="tabela-corpo"></tbody>
+        </table>
       </div>
+
+      <div id="erro" class="d-none">Erro ao carregar dados!</div>
     </section>
   </main>
 </div>
 
+<script src="/js/auditoria.js"></script>
 </body>
 </html>

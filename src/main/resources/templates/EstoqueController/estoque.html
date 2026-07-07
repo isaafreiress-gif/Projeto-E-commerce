@@ -5,18 +5,19 @@
   <title>Zion Tech | Controle de Estoque</title>
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Orbitron:wght@900&display=swap" rel="stylesheet">
+  <script src="js/produto.js"></script>
 </head>
 <body class="Cadastroprodutos">
 
 <div class="admin-container">
-  <aside class="sidebar">
+  <aside class="menu-lateral">
     <h2>Zion Admin</h2>
     <nav>
       <a href="paginaadm">📊 Dashboard</a>
-      <a href="usuario">👤 Usuários</a>
+      <a href="auditoria">👤 Usuários</a>
       <a href="cadastroproduto">📦 Novo Produto</a>
       <a href="estoque" class="active">📋 Estoque</a>
-      <a href="cadastroadm">👤 Cadastrar ADM</a>
+      <a href="cadastro">👤 Cadastrar ADM</a>
       <a href="produto" style="margin-top: 40px; border: 1px solid #a100d5; display: block; text-align: center;">Voltar para Loja</a>
       <a href="#" onclick="logout()" style="color: #ff4d4d;">Sair</a>
     </nav>
@@ -31,8 +32,8 @@
         <button class="btn-salvar" onclick="window.location.href='cadastroproduto'" style="padding: 10px 20px; font-size: 0.9rem;">+ Adicionar Produto</button>
       </div>
 
-      <div class="tabela-container">
-        <table class="tabela-usuarios">
+      <div class="table-responsive">
+        <table class="tabela-auditoria">
           <thead>
           <tr>
             <th>ID</th>
@@ -40,7 +41,7 @@
             <th>Nome do Produto</th>
             <th>Preço</th>
             <th>Status</th>
-            <th>quantidade</th>
+            <th>Ações</th>
           </tr>
           </thead>
           <tbody id="tabela-estoque-corpo"></tbody>
@@ -50,6 +51,5 @@
   </main>
 </div>
 
-<script src="js/script.js"></script>
 </body>
 </html>
