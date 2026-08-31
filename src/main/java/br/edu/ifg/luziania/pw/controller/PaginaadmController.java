@@ -1,6 +1,6 @@
 package br.edu.ifg.luziania.pw.controller;
 
-import br.edu.ifg.luziania.pw.model.DashboardDTO;
+import br.edu.ifg.luziania.pw.model.dto.DashboardDTO;
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
 import jakarta.ws.rs.GET;

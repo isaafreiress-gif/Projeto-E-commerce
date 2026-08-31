@@ -1,6 +1,6 @@
 package br.edu.ifg.luziania.pw.controller;
 
-import br.edu.ifg.luziania.pw.model.ProdutoDTO;
+import br.edu.ifg.luziania.pw.model.dto.ProdutoDTO;
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
 import jakarta.annotation.PostConstruct;

@@ -1,4 +1,4 @@
-package br.edu.ifg.luziania.pw.model;
+package br.edu.ifg.luziania.pw.model.dto;
 
 public class ItemCarrinhoDTO {
   private String nome;

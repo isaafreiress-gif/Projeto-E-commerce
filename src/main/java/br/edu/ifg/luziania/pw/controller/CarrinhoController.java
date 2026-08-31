@@ -1,6 +1,6 @@
 package br.edu.ifg.luziania.pw.controller;
 
-import br.edu.ifg.luziania.pw.model.CarrinhoDTO;
+import br.edu.ifg.luziania.pw.model.dto.CarrinhoDTO;
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
 import jakarta.ws.rs.*;

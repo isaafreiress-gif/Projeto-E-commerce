@@ -1,6 +1,6 @@
 package br.edu.ifg.luziania.pw.controller;
 
-import br.edu.ifg.luziania.pw.model.LogAuditoriaDTO;
+import br.edu.ifg.luziania.pw.model.dto.LogAuditoriaDTO;
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
 import jakarta.ws.rs.GET;

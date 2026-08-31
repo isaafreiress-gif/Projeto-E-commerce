@@ -1,8 +1,10 @@
 package br.edu.ifg.luziania.pw.controller;
 
-import br.edu.ifg.luziania.pw.model.AutenticacaoDTO;
+import br.edu.ifg.luziania.pw.model.bo.UsuarioBO;
+import br.edu.ifg.luziania.pw.model.dto.AutenticacaoDTO;
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -12,6 +14,9 @@ import java.util.Map;
 
 @Path("login")
 public class LoginController {
+
+  @Inject
+  UsuarioBO usuarioBO;
 
   // identificador (email do cliente OU id do admin) -> {senha, perfil}
   public static final Map<String, String[]> USUARIOS = new HashMap<>();
@@ -26,24 +31,16 @@ public class LoginController {
     public static native TemplateInstance login();
   }
 
-  @GET      //busca os dados html
+  @GET
   @Produces(MediaType.TEXT_HTML)
   public TemplateInstance login() {
     return Templates.login();
   }
 
-  @POST  //envia pro servidor
+  @POST
   @Path("autenticacao")
-  @Consumes(MediaType.APPLICATION_JSON)                        //rota base pra autenticar
+  @Consumes(MediaType.APPLICATION_JSON)
   public Response autenticar(AutenticacaoDTO dto) {
-
-    String[] usuario = USUARIOS.get(dto.getEmail());
-
-    if (usuario == null || !usuario[0].equals(dto.getSenha())) {
-      return Response.status(Response.Status.UNAUTHORIZED).build();
-    }
-
-    // Devolve só o perfil no corpo da resposta ("ADMIN" ou "CLIENTE")
-    return Response.ok(usuario[1]).build();
+    return usuarioBO.autenticar(dto);
   }
 }
