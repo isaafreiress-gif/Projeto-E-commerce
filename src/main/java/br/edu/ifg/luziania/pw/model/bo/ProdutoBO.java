@@ -1,13 +1,16 @@
 package br.edu.ifg.luziania.pw.model.bo;
 
-import br.edu.ifg.luziania.pw.controller.LogAuditoriaController;
 import br.edu.ifg.luziania.pw.controller.ProdutoController;
 import br.edu.ifg.luziania.pw.model.dto.ProdutoDTO;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
 
 @RequestScoped
 public class ProdutoBO {
+
+  @Inject
+  LogAuditoriaBO logAuditoriaBO;
 
   public Response registrar(ProdutoDTO dto, String usuario) {
 
@@ -24,7 +27,7 @@ public class ProdutoBO {
       ? "Não Autenticado (Visitante)"
       : usuario;
 
-    LogAuditoriaController.registrar(
+    logAuditoriaBO.registrar(
       "Cadastrou o produto \"" + dto.getNome() + "\" (ID: " + dto.getId() + ")",
       executor
     );
@@ -48,3 +51,10 @@ public class ProdutoBO {
     return null;
   }
 }
+
+
+
+
+
+
+

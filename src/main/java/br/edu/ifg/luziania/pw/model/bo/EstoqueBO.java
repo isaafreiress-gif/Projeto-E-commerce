@@ -1,13 +1,18 @@
 package br.edu.ifg.luziania.pw.model.bo;
 
-import br.edu.ifg.luziania.pw.controller.LogAuditoriaController;
 import br.edu.ifg.luziania.pw.controller.ProdutoController;
 import br.edu.ifg.luziania.pw.model.dto.ProdutoDTO;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
+
+import java.util.List;
 
 @RequestScoped
 public class EstoqueBO {
+
+  @Inject
+  LogAuditoriaBO logAuditoriaBO;
 
   public void inicializar() {
     if (ProdutoController.PRODUTOS.isEmpty()) {
@@ -16,7 +21,7 @@ public class EstoqueBO {
     }
   }
 
-  public java.util.List<ProdutoDTO> listar() {
+  public List<ProdutoDTO> listar() {
     return ProdutoController.PRODUTOS;
   }
 
@@ -31,7 +36,7 @@ public class EstoqueBO {
 
     if (removido) {
       String executor = (usuario == null || usuario.isBlank()) ? "Não Autenticado (Visitante)" : usuario;
-      LogAuditoriaController.registrar(
+      logAuditoriaBO.registrar(
         "Removeu o produto \"" + produto.getNome() + "\" (ID: " + id + ")",
         executor
       );
@@ -53,7 +58,7 @@ public class EstoqueBO {
         p.setPreco(dados.getPreco());
 
         String executor = (usuario == null || usuario.isBlank()) ? "Não Autenticado (Visitante)" : usuario;
-        LogAuditoriaController.registrar(
+        logAuditoriaBO.registrar(
           "Editou o produto \"" + p.getNome() + "\" (ID: " + id + ")",
           executor
         );
@@ -76,3 +81,10 @@ public class EstoqueBO {
     return null;
   }
 }
+
+
+
+
+
+
+
