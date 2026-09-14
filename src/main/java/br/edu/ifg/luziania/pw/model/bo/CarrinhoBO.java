@@ -3,7 +3,6 @@ package br.edu.ifg.luziania.pw.model.bo;
 import br.edu.ifg.luziania.pw.controller.CarrinhoController;
 import br.edu.ifg.luziania.pw.model.dto.CarrinhoDTO;
 import jakarta.enterprise.context.RequestScoped;
-import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
 
 @RequestScoped
@@ -12,8 +11,7 @@ public class CarrinhoBO {
   public Response listar() {
     return Response.ok(CarrinhoController.ITENS).build();
   }
-  
- @Transactional
+
   public Response adicionar(CarrinhoDTO dto) {
 
     Response validacao = validar(dto);
@@ -21,7 +19,6 @@ public class CarrinhoBO {
       return validacao;
     }
 
-    // Procura se o produto já está no carrinho
     for (CarrinhoDTO item : CarrinhoController.ITENS) {
       if (item.getNome().equals(dto.getNome())) {
         item.setQuantidade(item.getQuantidade() + 1);
@@ -29,7 +26,6 @@ public class CarrinhoBO {
       }
     }
 
-    // Se não estava, adiciona como novo item
     CarrinhoController.ITENS.add(new CarrinhoDTO(dto.getNome(), dto.getPreco(), 1));
     return Response.ok().build();
   }
