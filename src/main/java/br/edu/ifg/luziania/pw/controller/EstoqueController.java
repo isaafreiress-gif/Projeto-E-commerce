@@ -4,7 +4,6 @@ import br.edu.ifg.luziania.pw.model.bo.EstoqueBO;
 import br.edu.ifg.luziania.pw.model.dto.ProdutoDTO;
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
-import jakarta.annotation.PostConstruct;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -16,11 +15,6 @@ public class EstoqueController {
 
   @Inject
   EstoqueBO estoqueBO;
-
-  @PostConstruct
-  public void init() {
-    estoqueBO.inicializar();
-  }
 
   @CheckedTemplate
   public static class Templates {

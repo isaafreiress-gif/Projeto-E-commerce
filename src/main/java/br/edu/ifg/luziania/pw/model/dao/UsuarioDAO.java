@@ -5,7 +5,6 @@ import br.edu.ifg.luziania.pw.model.entity.Usuario;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
-import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class UsuarioDAO {
   public List<UsuarioDTO> listarTodos() {
     //language=jpql
     String jpql = "select new br.edu.ifg.luziania.pw.model.dto.UsuarioDTO(u.id, u.nome, u.email) from Usuario u";
-    return entityManager.createQuery(jpql).getResultList();
+    return entityManager.createQuery(jpql, UsuarioDTO.class).getResultList();
   }
 
   public Usuario buscarPorEmail(String email) {

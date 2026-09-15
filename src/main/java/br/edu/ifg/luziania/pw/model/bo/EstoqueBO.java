@@ -1,9 +1,11 @@
 package br.edu.ifg.luziania.pw.model.bo;
 
-import br.edu.ifg.luziania.pw.controller.ProdutoController;
+import br.edu.ifg.luziania.pw.model.dao.ProdutoDAO;
 import br.edu.ifg.luziania.pw.model.dto.ProdutoDTO;
+import br.edu.ifg.luziania.pw.model.entity.Produto;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
 
 import java.util.List;
@@ -12,39 +14,36 @@ import java.util.List;
 public class EstoqueBO {
 
   @Inject
+  ProdutoDAO dao;
+
+  @Inject
   LogAuditoriaBO logAuditoriaBO;
 
-  public void inicializar() {
-    if (ProdutoController.PRODUTOS.isEmpty()) {
-      ProdutoController.PRODUTOS.add(new ProdutoDTO(1, "Teclado Mecânico RGB", 299.90, "img/teclado.webp", "Teclado com iluminação customizável"));
-      ProdutoController.PRODUTOS.add(new ProdutoDTO(2, "Mouse Gamer 16000 DPI", 189.90, "img/mouses.webp", "Mouse de alta precisão"));
-    }
-  }
-
   public List<ProdutoDTO> listar() {
-    return ProdutoController.PRODUTOS;
+    return dao.listarTodos();
   }
 
+  @Transactional
   public Response deletar(Integer id, String usuario) {
 
-    ProdutoDTO produto = ProdutoController.PRODUTOS.stream()
-      .filter(p -> p.getId().equals(id))
-      .findFirst()
-      .orElse(null);
+    Produto produto = dao.buscarPorId(id);
 
-    boolean removido = ProdutoController.PRODUTOS.removeIf(p -> p.getId().equals(id));
-
-    if (removido) {
-      String executor = (usuario == null || usuario.isBlank()) ? "Não Autenticado (Visitante)" : usuario;
-      logAuditoriaBO.registrar(
-        "Removeu o produto \"" + produto.getNome() + "\" (ID: " + id + ")",
-        executor
-      );
+    if (produto == null) {
+      return Response.status(Response.Status.NOT_FOUND).build();
     }
+
+    dao.delete(produto);
+
+    String executor = (usuario == null || usuario.isBlank()) ? "Não Autenticado (Visitante)" : usuario;
+    logAuditoriaBO.registrar(
+      "Removeu o produto \"" + produto.getNome() + "\" (ID: " + id + ")",
+      executor
+    );
 
     return Response.noContent().build();
   }
 
+  @Transactional
   public Response editar(Integer id, ProdutoDTO dados, String usuario) {
 
     Response validacao = validar(dados);
@@ -52,19 +51,20 @@ public class EstoqueBO {
       return validacao;
     }
 
-    for (ProdutoDTO p : ProdutoController.PRODUTOS) {
-      if (p.getId().equals(id)) {
-        p.setNome(dados.getNome());
-        p.setPreco(dados.getPreco());
-
-        String executor = (usuario == null || usuario.isBlank()) ? "Não Autenticado (Visitante)" : usuario;
-        logAuditoriaBO.registrar(
-          "Editou o produto \"" + p.getNome() + "\" (ID: " + id + ")",
-          executor
-        );
-        break;
-      }
+    Produto produto = dao.buscarPorId(id);
+    if (produto == null) {
+      return Response.status(Response.Status.NOT_FOUND).build();
     }
+
+    produto.setNome(dados.getNome());
+    produto.setPreco(dados.getPreco());
+    dao.update(produto);
+
+    String executor = (usuario == null || usuario.isBlank()) ? "Não Autenticado (Visitante)" : usuario;
+    logAuditoriaBO.registrar(
+      "Editou o produto \"" + produto.getNome() + "\" (ID: " + id + ")",
+      executor
+    );
 
     return Response.ok(dados).build();
   }
@@ -81,10 +81,3 @@ public class EstoqueBO {
     return null;
   }
 }
-
-
-
-
-
-
-
