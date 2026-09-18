@@ -1,32 +1,24 @@
 package br.edu.ifg.luziania.pw.model.bo;
 
-import br.edu.ifg.luziania.pw.controller.LogAuditoriaController;
-import br.edu.ifg.luziania.pw.model.dto.LogAuditoriaDTO;
-import jakarta.enterprise.context.ApplicationScoped;
+import br.edu.ifg.luziania.pw.model.dao.LogAuditoriaDAO;
+import br.edu.ifg.luziania.pw.model.entity.LogAuditoria;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-@ApplicationScoped
+@RequestScoped
 public class LogAuditoriaBO {
 
-  private int proximoId = 1;
+  @Inject
+  LogAuditoriaDAO dao;
 
+  @Transactional
   public void registrar(String acao, String usuarioExecutor) {
-    LogAuditoriaController.LOGS.add(new LogAuditoriaDTO(
-      proximoId++,
-      acao,
-      usuarioExecutor,
-      LocalDateTime.now()
-    ));
+    dao.insert(new LogAuditoria(acao, usuarioExecutor));
   }
 
   public Response listar() {
-    List<LogAuditoriaDTO> copia = new ArrayList<>(LogAuditoriaController.LOGS);
-    Collections.reverse(copia); // mais novo primeiro
-    return Response.ok(copia).build();
+    return Response.ok(dao.listarTodos()).build();
   }
 }

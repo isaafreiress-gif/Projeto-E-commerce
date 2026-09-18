@@ -1,7 +1,6 @@
 package br.edu.ifg.luziania.pw.controller;
 
 import br.edu.ifg.luziania.pw.model.bo.LogAuditoriaBO;
-import br.edu.ifg.luziania.pw.model.dto.LogAuditoriaDTO;
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
 import jakarta.inject.Inject;
@@ -10,13 +9,9 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import java.util.ArrayList;
-import java.util.List;
 
-@Path("auditoria")
+@Path("/auditoria")
 public class LogAuditoriaController {
-
-  public static final List<LogAuditoriaDTO> LOGS = new ArrayList<>();
 
   @Inject
   LogAuditoriaBO logAuditoriaBO;

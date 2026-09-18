@@ -1,17 +1,24 @@
 package br.edu.ifg.luziania.pw.model.bo;
 
-import br.edu.ifg.luziania.pw.controller.CarrinhoController;
+import br.edu.ifg.luziania.pw.model.dao.CarrinhoDAO;
 import br.edu.ifg.luziania.pw.model.dto.CarrinhoDTO;
+import br.edu.ifg.luziania.pw.model.entity.ItemCarrinho;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
 
 @RequestScoped
 public class CarrinhoBO {
 
+  @Inject
+  CarrinhoDAO dao;
+
   public Response listar() {
-    return Response.ok(CarrinhoController.ITENS).build();
+    return Response.ok(dao.listarTodos()).build();
   }
 
+  @Transactional
   public Response adicionar(CarrinhoDTO dto) {
 
     Response validacao = validar(dto);
@@ -19,24 +26,27 @@ public class CarrinhoBO {
       return validacao;
     }
 
-    for (CarrinhoDTO item : CarrinhoController.ITENS) {
-      if (item.getNome().equals(dto.getNome())) {
-        item.setQuantidade(item.getQuantidade() + 1);
-        return Response.ok().build();
-      }
+    ItemCarrinho existente = dao.buscarPorNome(dto.getNome());
+
+    if (existente != null) {
+      existente.setQuantidade(existente.getQuantidade() + 1);
+      dao.update(existente);
+    } else {
+      dao.insert(new ItemCarrinho(new CarrinhoDTO(dto.getNome(), dto.getPreco(), 1)));
     }
 
-    CarrinhoController.ITENS.add(new CarrinhoDTO(dto.getNome(), dto.getPreco(), 1));
     return Response.ok().build();
   }
 
+  @Transactional
   public Response remover(String nome) {
-    CarrinhoController.ITENS.removeIf(item -> item.getNome().equals(nome));
+    dao.deleteTodosPorNome(nome);
     return Response.ok().build();
   }
 
+  @Transactional
   public Response finalizar() {
-    CarrinhoController.ITENS.clear();
+    dao.limparTudo();
     return Response.ok().build();
   }
 

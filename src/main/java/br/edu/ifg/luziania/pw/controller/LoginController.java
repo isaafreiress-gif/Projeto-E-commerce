@@ -9,18 +9,8 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @Path("login")
 public class LoginController {
-
-  public static final Map<String, String[]> USUARIOS = new HashMap<>();
-
-  static {
-    USUARIOS.put("isadora@gmail.com", new String[]{"123456", "CLIENTE"});
-    USUARIOS.put("202410", new String[]{"admin123", "ADMIN"});
-  }
 
   @Inject
   AutenticacaoBO autenticacaoBO;

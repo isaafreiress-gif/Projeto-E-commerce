@@ -14,14 +14,15 @@ public class AutenticacaoBO {
   UsuarioDAO dao;
 
   public Response autenticar(AutenticacaoDTO dto) {
-
+    // Biroken ti usuario iti database babaen ti email
     Usuario usuario = dao.buscarPorEmail(dto.getEmail());
 
+    // Sumungbat ti UNAUTHORIZED (401) no awan ti usuario wenno madi ti password
     if (usuario == null || !usuario.getSenha().equals(dto.getSenha())) {
       return Response.status(Response.Status.UNAUTHORIZED).build();
     }
 
-    // Devolve só o perfil no corpo da resposta ("ADMIN" ou "CLIENTE")
+    // Isungbat ti perfil ("ADMIN" wenno "CLIENTE") no adda ti usuario
     return Response.ok(usuario.getPerfil()).build();
   }
 }

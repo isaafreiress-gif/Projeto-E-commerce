@@ -9,14 +9,8 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Path("carrinho")
 public class CarrinhoController {
-
-  // Lista única, compartilhada, guardada em memória
-  public static final List<CarrinhoDTO> ITENS = new ArrayList<>();
 
   @Inject
   CarrinhoBO carrinhoBO;
