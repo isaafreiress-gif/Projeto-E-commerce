@@ -27,17 +27,33 @@ public class UsuarioDAO {
   }
 
   public List<UsuarioDTO> listarTodos() {
-    //language=jpql
-    String jpql = "select new br.edu.ifg.luziania.pw.model.dto.UsuarioDTO(u.id, u.nome, u.email) from Usuario u";
+    String jpql = "select new br.edu.ifg.luziania.pw.model.dto.UsuarioDTO(u.id, u.nome, u.email, u.perfil) from Usuario u";
     return entityManager.createQuery(jpql, UsuarioDTO.class).getResultList();
   }
 
+  public List<UsuarioDTO> listarPorPerfil(String perfil) {
+    String jpql = "select new br.edu.ifg.luziania.pw.model.dto.UsuarioDTO(u.id, u.nome, u.email, u.perfil) from Usuario u where u.perfil = :perfil";
+    return entityManager.createQuery(jpql, UsuarioDTO.class)
+      .setParameter("perfil", perfil)
+      .getResultList();
+  }
+
+  public Usuario buscarPorId(Integer id) {
+    return entityManager.find(Usuario.class, id);
+  }
+
   public Usuario buscarPorEmail(String email) {
-    //language=jpql
     String jpql = "from Usuario u where u.email = :email";
     List<Usuario> resultado = entityManager.createQuery(jpql, Usuario.class)
       .setParameter("email", email)
       .getResultList();
     return resultado.isEmpty() ? null : resultado.get(0);
+  }
+
+  public long contarPorPerfil(String perfil) {
+    String jpql = "select count(u) from Usuario u where u.perfil = :perfil";
+    return entityManager.createQuery(jpql, Long.class)
+      .setParameter("perfil", perfil)
+      .getSingleResult();
   }
 }

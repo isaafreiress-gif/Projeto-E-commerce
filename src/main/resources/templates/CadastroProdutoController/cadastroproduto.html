@@ -14,10 +14,10 @@
     <h2>Zion Admin</h2>
     <nav>
       <a href="paginaadm">📊 Dashboard</a>
-      <a href="auditoria">👤 Usuários</a>
+      <a href="auditoria">👤 Auditoria</a>
       <a href="cadastroproduto" class="active">📦 Novo Produto</a>
       <a href="estoque">📋 Estoque</a>
-      <a href="cadastro">👤 Cadastrar ADM</a>
+      <a href="cadastroadm">👤 Cadastrar ADM</a>
       <a href="produto" style="margin-top: 40px; border: 1px solid #a100d5; display: block; text-align: center;">Voltar para Loja</a>
       <a href="#" onclick="logout()" style="color: #ff4d4d;">Sair</a>
     </nav>
@@ -43,6 +43,9 @@
         <div class="input-group">
           <label for="prod-imagem">Link da Imagem (URL)</label>
           <input type="text" id="prod-imagem" placeholder="Ex: https://linkdaimagem.com/foto.jpg" required>
+          <p id="preview-msg" style="color: #ff4d4d; font-size: 0.85rem; margin-top: 6px;"></p>
+          <img id="preview-imagem" alt="Prévia da imagem"
+               style="display: none; max-width: 220px; max-height: 160px; margin-top: 10px; border-radius: 8px; border: 1px solid #a100d5; object-fit: contain; background: #1a1a1a;">
         </div>
 
         <div class="input-group">

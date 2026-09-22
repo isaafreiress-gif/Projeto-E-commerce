@@ -4,17 +4,27 @@ public class UsuarioDTO {
   private Integer id;
   private String nome;
   private String email;
+  private String perfil;
 
   public UsuarioDTO() {
     this.id = 0;
     this.nome = "";
     this.email = "";
+    this.perfil = "";
   }
 
   public UsuarioDTO(Integer id, String nome, String email) {
     this.id = id;
     this.nome = nome;
     this.email = email;
+    this.perfil = "";
+  }
+
+  public UsuarioDTO(Integer id, String nome, String email, String perfil) {
+    this.id = id;
+    this.nome = nome;
+    this.email = email;
+    this.perfil = perfil;
   }
 
   public Integer getId() {
@@ -39,5 +49,13 @@ public class UsuarioDTO {
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  public String getPerfil() {
+    return perfil;
+  }
+
+  public void setPerfil(String perfil) {
+    this.perfil = perfil;
   }
 }
