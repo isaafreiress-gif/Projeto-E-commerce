@@ -56,4 +56,8 @@ public class UsuarioDAO {
       .setParameter("perfil", perfil)
       .getSingleResult();
   }
+  public long contarTodos() {
+    String jpql = "select count(u) from Usuario u";
+    return entityManager.createQuery(jpql, Long.class).getSingleResult();
+  }
 }
