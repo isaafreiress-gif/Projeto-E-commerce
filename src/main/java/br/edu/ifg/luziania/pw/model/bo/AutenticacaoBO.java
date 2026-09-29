@@ -5,6 +5,7 @@ import br.edu.ifg.luziania.pw.model.dto.AutenticacaoDTO;
 import br.edu.ifg.luziania.pw.model.entity.Usuario;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
 
 @RequestScoped
@@ -13,16 +14,23 @@ public class AutenticacaoBO {
   @Inject
   UsuarioDAO dao;
 
+  @Inject
+  LogAuditoriaBO logAuditoriaBO; // Injeção do BO de Auditoria
+
+  @Transactional
   public Response autenticar(AutenticacaoDTO dto) {
-    // Biroken ti usuario iti database babaen ti email
     Usuario usuario = dao.buscarPorEmail(dto.getEmail());
 
-    // Sumungbat ti UNAUTHORIZED (401) no awan ti usuario wenno madi ti password
+    // Se a senha estiver incorreta ou o usuário não existir
     if (usuario == null || !usuario.getSenha().equals(dto.getSenha())) {
+      String executor = (dto.getEmail() != null && !dto.getEmail().isBlank()) ? dto.getEmail() : "Desconhecido";
+      logAuditoriaBO.registrar("FALHA_LOGIN", "Tentativa de login com e-mail: " + executor);
       return Response.status(Response.Status.UNAUTHORIZED).build();
     }
 
-    // Isungbat ti perfil ("ADMIN" wenno "CLIENTE") no adda ti usuario
+    // Registra o sucesso no login
+    logAuditoriaBO.registrar("LOGIN_SUCESSO", usuario.getEmail());
+
     return Response.ok(usuario.getPerfil()).build();
   }
 }

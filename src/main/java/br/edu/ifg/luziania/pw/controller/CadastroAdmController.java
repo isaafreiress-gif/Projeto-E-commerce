@@ -30,10 +30,10 @@ public class CadastroAdmController {
   }
 
   @GET
-  @Path("lista")
+  @Path("todos")
   @Produces(MediaType.APPLICATION_JSON)
-  public List<UsuarioDTO> listarAdmins() {
-    return usuarioBO.listarAdmins();
+  public List<UsuarioDTO> listarTodosUsuarios() {
+    return usuarioBO.listarTodosUsuarios();
   }
 
   @POST
@@ -43,9 +43,15 @@ public class CadastroAdmController {
     return usuarioBO.registrarAdmin(dto);
   }
 
+  @PUT
+  @Path("alterar-perfil/{id}")
+  public Response alterarPerfil(@PathParam("id") Integer id, String novoPerfil) {
+    return usuarioBO.alterarPerfil(id, novoPerfil);
+  }
+
   @DELETE
   @Path("excluir/{id}")
-  public Response excluirAdmin(@PathParam("id") Integer id) {
-    return usuarioBO.excluirAdmin(id);
+  public Response excluirUsuario(@PathParam("id") Integer id) {
+    return usuarioBO.excluirUsuario(id);
   }
 }
