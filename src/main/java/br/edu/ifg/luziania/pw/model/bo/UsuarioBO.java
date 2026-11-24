@@ -20,8 +20,14 @@ public class UsuarioBO {
   @Inject
   LogAuditoriaBO logAuditoriaBO;
 
+  // Cadastro público: sempre cria CLIENTE, ignorando o perfil enviado pelo navegador
   @Transactional
   public Response registrar(CadastroDTO dto) {
+    dto.setPerfilNome("CLIENTE");
+    return salvarNovoUsuario(dto);
+  }
+
+  private Response salvarNovoUsuario(CadastroDTO dto) {
     if (dto.getEmail() == null || dto.getEmail().isBlank()
       || dto.getSenha() == null || dto.getSenha().isBlank()
       || dto.getNome() == null || dto.getNome().isBlank()) {
@@ -34,10 +40,6 @@ public class UsuarioBO {
         .entity("Esse e-mail já está cadastrado.").build();
     }
 
-    if (dto.getPerfilNome() == null || dto.getPerfilNome().isBlank()) {
-      dto.setPerfilNome("CLIENTE");
-    }
-
     Usuario entity = new Usuario(dto);
     dao.insert(entity);
 
@@ -47,7 +49,7 @@ public class UsuarioBO {
   @Transactional
   public Response registrarAdmin(CadastroDTO dto) {
     dto.setPerfilNome("ADMIN");
-    Response response = registrar(dto);
+    Response response = salvarNovoUsuario(dto);
 
     if (response.getStatus() == Response.Status.OK.getStatusCode()) {
       logAuditoriaBO.registrar("CADASTRO_ADMIN", "Novo Admin Cadastrado: " + dto.getEmail());

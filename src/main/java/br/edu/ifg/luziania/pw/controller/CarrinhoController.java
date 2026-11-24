@@ -4,11 +4,13 @@ import br.edu.ifg.luziania.pw.model.bo.CarrinhoBO;
 import br.edu.ifg.luziania.pw.model.dto.CarrinhoDTO;
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+@RolesAllowed({"CLIENTE", "ADMIN"})
 @Path("carrinho")
 public class CarrinhoController {
 

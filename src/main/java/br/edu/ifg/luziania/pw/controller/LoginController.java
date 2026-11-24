@@ -7,6 +7,7 @@ import io.quarkus.qute.TemplateInstance;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.NewCookie;
 import jakarta.ws.rs.core.Response;
 
 @Path("login")
@@ -31,5 +32,18 @@ public class LoginController {
   @Consumes(MediaType.APPLICATION_JSON)
   public Response autenticar(AutenticacaoDTO dto) {
     return autenticacaoBO.autenticar(dto);
+  }
+
+  // O cookie é HttpOnly (o JavaScript não consegue apagar), então o servidor o expira
+  @POST
+  @Path("logout")
+  public Response logout() {
+    NewCookie expirado = new NewCookie.Builder("jwt-token")
+      .value("")
+      .path("/")
+      .maxAge(0)
+      .httpOnly(true)
+      .build();
+    return Response.ok().cookie(expirado).build();
   }
 }

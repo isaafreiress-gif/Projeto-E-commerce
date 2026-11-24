@@ -3,6 +3,7 @@ package br.edu.ifg.luziania.pw.controller;
 import br.edu.ifg.luziania.pw.model.bo.LogAuditoriaBO;
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -10,6 +11,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+@RolesAllowed("ADMIN")
 @Path("/auditoria")
 public class LogAuditoriaController {
 

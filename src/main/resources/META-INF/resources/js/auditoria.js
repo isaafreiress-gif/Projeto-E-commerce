@@ -7,7 +7,7 @@ function carregarLogs() {
   containerTabela.classList.add("d-none");
   erro.classList.add("d-none");
 
-  fetch('http://localhost:8080/auditoria/lista')
+  fetch('/auditoria/lista')
     .then(function (response) {
       if (!response.ok) throw new Error("Erro na rede");
       return response.json();

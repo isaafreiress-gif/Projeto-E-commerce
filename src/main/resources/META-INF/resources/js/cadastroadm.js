@@ -142,6 +142,4 @@ function cadastrarAdmin() {
     });
 }
 
-function logout() {
-  window.location.href = "/login";
-}
+

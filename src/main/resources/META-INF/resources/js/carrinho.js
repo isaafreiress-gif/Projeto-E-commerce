@@ -48,9 +48,10 @@ function inicializarBotoesComprar() {
         .then(function (response) {
           if (response.ok) {
             alert(nome + " adicionado ao carrinho!");
-            // REQUISITO CHAVE: Recarrega o carrinho para puxar a nova lista do servidor
-            // e atualizar o número do contador na mesma hora!
             carregarCarrinho();
+          } else if (response.status === 401) {
+            alert("Faça login para adicionar produtos ao carrinho.");
+            window.location.href = "/login";
           } else {
             alert("Falha ao adicionar produto ao servidor.");
           }

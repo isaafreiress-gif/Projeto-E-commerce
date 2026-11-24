@@ -22,7 +22,3 @@ function atualizarDados() {
   carregarStats();
   alert("Dados atualizados com sucesso!");
 }
-
-function logout() {
-  window.location.href = "/login";
-}

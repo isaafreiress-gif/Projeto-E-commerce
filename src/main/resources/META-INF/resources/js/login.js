@@ -27,10 +27,8 @@ function autenticar() {
     .then(function (perfil) {
       alert("Seja bem-vindo(a)!");
 
-      // Guarda quem logou, pra usar depois em outras telas
-      localStorage.setItem("usuarioLogado", email);
-      localStorage.setItem("perfilLogado", perfil);
-
+      // O JWT já foi gravado pelo servidor em um cookie HttpOnly;
+      // o perfil devolvido serve só para escolher a tela.
       if (perfil === "ADMIN") {
         window.location.href = "/paginaadm";
       } else {

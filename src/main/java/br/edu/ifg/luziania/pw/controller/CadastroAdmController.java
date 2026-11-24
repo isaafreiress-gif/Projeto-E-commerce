@@ -5,6 +5,7 @@ import br.edu.ifg.luziania.pw.model.dto.CadastroDTO;
 import br.edu.ifg.luziania.pw.model.dto.UsuarioDTO;
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -12,6 +13,7 @@ import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 
+@RolesAllowed("ADMIN")
 @Path("cadastroadm")
 public class CadastroAdmController {
 
