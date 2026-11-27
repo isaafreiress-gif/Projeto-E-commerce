@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acesso Restrito | Zion Tech Store</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Orbitron:wght@900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Montserrat", sans-serif; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      color: #fff7f4;
+      background: linear-gradient(135deg, #29002e 0%, black 100%);
+    }
+
+    .card {
+      width: 100%;
+      max-width: 440px;
+      text-align: center;
+      padding: 40px 30px;
+      border-radius: 20px;
+      background: rgba(26, 26, 26, 0.9);
+      border: 1px solid #a100d5;
+      box-shadow: 0 0 30px rgba(161, 0, 213, 0.3);
+    }
+
+    .icone { font-size: 3.5rem; }
+
+    h1 {
+      font-family: "Orbitron", sans-serif;
+      font-size: 1.7rem;
+      margin: 10px 0 15px;
+    }
+
+    p { color: #a694c7; line-height: 1.6; margin-bottom: 28px; }
+
+    .btn {
+      display: block;
+      padding: 12px;
+      margin-top: 12px;
+      border: 1px solid #a100d5;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .btn:hover { background: #a100d5; }
+    .btn.principal { background: #a100d5; }
+    .btn.principal:hover { background: #c600fe; border-color: #c600fe; }
+  </style>
+</head>
+<body>
+
+<main class="card">
+  <div class="icone">🔒</div>
+  <h1>Acesso Restrito</h1>
+  <p>Você não tem permissão para acessar esta área. Faça login com uma conta autorizada para continuar.</p>
+
+  <a class="btn principal" href="/login">Fazer login</a>
+  <a class="btn" href="/produto">Voltar para a loja</a>
+</main>
+
+</body>
+</html>

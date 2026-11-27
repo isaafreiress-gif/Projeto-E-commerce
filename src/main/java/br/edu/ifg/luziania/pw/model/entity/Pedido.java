@@ -14,13 +14,15 @@ public class Pedido {
   Double valorTotal;
   Integer quantidadeItens;
   LocalDateTime dataHora;
+  String emailUsuario;
 
   public Pedido() {
   }
 
-  public Pedido(Double valorTotal, Integer quantidadeItens) {
+  public Pedido(Double valorTotal, Integer quantidadeItens, String emailUsuario) {
     this.valorTotal = valorTotal;
     this.quantidadeItens = quantidadeItens;
+    this.emailUsuario = emailUsuario;
     this.dataHora = LocalDateTime.now().withNano(0);
   }
 
@@ -54,5 +56,13 @@ public class Pedido {
 
   public void setDataHora(LocalDateTime dataHora) {
     this.dataHora = dataHora;
+  }
+
+  public String getEmailUsuario() {
+    return emailUsuario;
+  }
+
+  public void setEmailUsuario(String emailUsuario) {
+    this.emailUsuario = emailUsuario;
   }
 }

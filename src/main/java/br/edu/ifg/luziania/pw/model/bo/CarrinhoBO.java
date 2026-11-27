@@ -52,7 +52,7 @@ public class CarrinhoBO {
   }
 
   @Transactional
-  public Response finalizar() {
+  public Response finalizar(String emailUsuario) {
     List<CarrinhoDTO> itens = dao.listarTodos();
 
     if (itens.isEmpty()) {
@@ -68,7 +68,7 @@ public class CarrinhoBO {
       quantidadeItens += qtd;
     }
 
-    pedidoDAO.insert(new Pedido(valorTotal, quantidadeItens));
+    pedidoDAO.insert(new Pedido(valorTotal, quantidadeItens, emailUsuario));
     dao.limparTudo();
     return Response.ok().build();
   }

@@ -1,3 +1,28 @@
+// Converte texto digitado em formato brasileiro para número.
+// "7.610" -> 7610 | "7.610,50" -> 7610.5 | "299,90" -> 299.9 | "299.90" -> 299.9
+function parsePreco(texto) {
+  var t = String(texto).trim().replace(/[R$\s]/g, "");
+  if (t === "") return NaN;
+
+  if (t.indexOf(",") !== -1) {
+    // Tem vírgula: ponto é separador de milhar, vírgula é decimal
+    t = t.replace(/\./g, "").replace(",", ".");
+  } else if (/^\d{1,3}(\.\d{3})+$/.test(t)) {
+    // Só pontos no padrão de milhar (ex: 7.610 ou 1.250.000)
+    t = t.replace(/\./g, "");
+  }
+  // Caso contrário (ex: 299.90) o ponto é decimal e fica como está
+  return parseFloat(t);
+}
+
+// Formata número para o padrão brasileiro: 7610 -> "7.610,00"
+function formatarPreco(valor) {
+  return Number(valor).toLocaleString("pt-BR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+}
+
 function previewImagem() {
   var campoUrl = document.getElementById("prod-imagem");
   var imagem = document.getElementById("preview-imagem");
@@ -40,9 +65,15 @@ function cadastrarProduto() {
     return;
   }
 
+  var precoNumero = parsePreco(preco);
+  if (isNaN(precoNumero) || precoNumero <= 0) {
+    alert("Informe um preço válido. Ex: 7.610,00");
+    return;
+  }
+
   var dados = {
     nome: nome,
-    preco: parseFloat(preco),
+    preco: precoNumero,
     imagem: imagem,
     descricao: descricao
   };
@@ -92,7 +123,7 @@ function carregarProdutosLoja() {
       }
 
       produtos.forEach(function (prod) {
-        var precoFormatado = Number(prod.preco).toFixed(2).replace(".", ",");
+        var precoFormatado = formatarPreco(prod.preco);
         var card = document.createElement("div");
         card.className = "card";
 
@@ -140,7 +171,7 @@ function carregarEstoque() {
           "<td>#" + prod.id + "</td>" +
           "<td><img src='" + (prod.imagem || "") + "' style='width:40px;height:40px;object-fit:contain;'></td>" +
           "<td>" + prod.nome + "</td>" +
-          "<td>R$ " + Number(prod.preco).toFixed(2).replace(".", ",") + "</td>" +
+          "<td>R$ " + formatarPreco(prod.preco) + "</td>" +
           "<td><span class='badge admin'>Ativo</span></td>" +
           "<td>" +
           "<button class='btn-acao' onclick='editarProduto(" + prod.id + ")' style='border-color:#4da6ff;color:#4da6ff;margin-right:5px;'>✏️</button>" +
@@ -173,9 +204,15 @@ function editarProduto(id) {
 
   if (novoNome === null || novoPreco === null) return;
 
+  var novoPrecoNumero = parsePreco(novoPreco);
+  if (isNaN(novoPrecoNumero) || novoPrecoNumero <= 0) {
+    alert("Informe um preço válido. Ex: 7.610,00");
+    return;
+  }
+
   var dados = {
     nome: novoNome,
-    preco: parseFloat(novoPreco)
+    preco: novoPrecoNumero
   };
 
   fetch("/estoque/" + id, {
@@ -212,5 +249,3 @@ document.addEventListener("DOMContentLoaded", function () {
     campoImagem.addEventListener("input", previewImagem);
   }
 });
-
-
